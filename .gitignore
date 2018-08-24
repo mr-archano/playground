@@ -1,3 +1,18 @@
 # Gradle
 build
 .gradle
+
+# MacOs
+.DS_Store
+
+# IDE
+*.iml
+.idea/caches
+.idea/misc.xml
+.idea/modules
+.idea/modules.xml
+.idea/uiDesigner.xml
+.idea/**/libraries
+.idea/**/gradle.xml
+.idea/**/workspace.xml
+local.properties
