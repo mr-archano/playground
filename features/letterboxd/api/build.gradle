@@ -1,18 +1,3 @@
-buildscript {
-    repositories {
-        google()
-        mavenCentral()
-    }
-    dependencies {
-        classpath G.maven.kotlin.plugin
-    }
-}
-
-repositories {
-    google()
-    mavenCentral()
-}
-
 apply plugin: 'kotlin'
 
 dependencies {
