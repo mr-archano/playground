@@ -18,6 +18,7 @@ apply plugin: 'kotlin'
 dependencies {
     implementation G.maven.kotlin.stdlib
     implementation G.maven.okhttp
+    implementation G.maven.rxjava
 
     testImplementation G.maven.junit
     testImplementation G.maven.truth
