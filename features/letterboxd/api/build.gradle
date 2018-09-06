@@ -1,0 +1,21 @@
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath G.maven.kotlin.plugin
+    }
+}
+
+repositories {
+    google()
+    mavenCentral()
+}
+
+apply plugin: 'kotlin'
+
+dependencies {
+    implementation G.maven.kotlin.stdlib
+    testImplementation G.maven.junit
+}
