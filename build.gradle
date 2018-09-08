@@ -15,7 +15,11 @@ subprojects {
         mavenCentral()
         jcenter()
     }
+
+    apply plugin: AndroidConfigurationPlugin
 }
+
+version = '1.0'
 
 task wrapper(type: Wrapper) {
     distributionType Wrapper.DistributionType.ALL
