@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 android {
     applySdk()
@@ -17,4 +18,5 @@ android {
 
 dependencies {
     implementation G.maven.android.appCompat
+    implementation G.maven.kotlin.stdlib
 }
