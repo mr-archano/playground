@@ -25,7 +25,7 @@ class AndroidJacocoReportPlugin implements Plugin<Project> {
             def excludeList = ['**/R.class', '**/BuildConfig.class']
 
             project.extensions.configure(JacocoPluginExtension) { jacocoExtension ->
-                jacocoExtension.ext.exclude = { patterns ->
+                jacocoExtension.ext.exclude = { String... patterns ->
                     excludeList.addAll(patterns)
                 }
             }
