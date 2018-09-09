@@ -34,7 +34,11 @@ android {
 
 dependencies {
     implementation G.maven.kotlin.stdlib
+    implementation G.maven.moshi
     implementation G.maven.okhttp
+    implementation G.maven.retrofit.core
+    implementation G.maven.retrofit.moshi
+    implementation G.maven.retrofit.rxjava
     implementation G.maven.rxjava
 
     testImplementation G.maven.junit
