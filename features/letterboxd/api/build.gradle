@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'jacoco'
 
 buildProperties {
 
@@ -38,4 +39,8 @@ dependencies {
 
     testImplementation G.maven.junit
     testImplementation G.maven.truth
+}
+
+jacoco {
+    exclude '**/*Companion*'
 }
