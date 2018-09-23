@@ -1,30 +1,41 @@
 package io.archano.playground.common.api
 
 import com.squareup.moshi.Moshi
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-class RetrofitConfiguration private constructor(
-        private val httpclient: OkHttpClient,
-        private val moshi: Moshi,
-        private val retrofit: Retrofit) {
+private val BASE_HTTP_CLIENT: OkHttpClient = OkHttpClient.Builder()
+        .build()
+
+private val BASE_MOSHI: Moshi = Moshi.Builder()
+        .build()
+
+private val BASE_RETROFIT: Retrofit = Retrofit.Builder()
+        .baseUrl("http://change.me")
+        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+        .build()
+
+class RetrofitConfiguration(
+        private val httpclient: OkHttpClient = BASE_HTTP_CLIENT,
+        private val moshi: Moshi = BASE_MOSHI,
+        private val retrofit: Retrofit = BASE_RETROFIT) {
+
+    fun newBuilder(): Builder {
+        return Builder(httpclient.newBuilder(), moshi.newBuilder(), retrofit.newBuilder())
+    }
 
     fun <T> create(service: Class<T>): T {
         return retrofit.create(service)
-    }
-
-    fun edit(): Builder {
-        return Builder(httpclient.newBuilder(), moshi.newBuilder(), retrofit.newBuilder())
     }
 
     class Builder constructor(private val httpClientBuilder: OkHttpClient.Builder,
                               private val moshiBuilder: Moshi.Builder,
                               private val retrofitBuilder: Retrofit.Builder) {
 
-        fun withNetworkInterceptor(interceptor: Interceptor): Builder {
-            httpClientBuilder.addInterceptor(interceptor)
+        fun withRequestDecorator(decorator: RequestDecorator): Builder {
+            httpClientBuilder.addInterceptor(decorator.asInterceptor())
             return this
         }
 
@@ -41,6 +52,10 @@ class RetrofitConfiguration private constructor(
                     .addConverterFactory(MoshiConverterFactory.create(moshi))
                     .build()
             return RetrofitConfiguration(httpClient, moshi, retrofit)
+        }
+
+        fun <T> create(service: Class<T>): T {
+            return build().create(service)
         }
     }
 }

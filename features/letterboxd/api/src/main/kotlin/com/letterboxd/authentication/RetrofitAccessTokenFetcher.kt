@@ -1,13 +1,9 @@
 package com.letterboxd.authentication
 
 import com.letterboxd.BuildConfig
-import com.squareup.moshi.Moshi
+import io.archano.playground.common.api.RetrofitConfiguration
 import io.reactivex.Single
 import io.reactivex.functions.Function
-import okhttp3.OkHttpClient
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.Headers
@@ -23,19 +19,13 @@ internal class RetrofitAccessTokenFetcher private constructor(private val backen
 
     companion object {
 
-        fun create(): RetrofitAccessTokenFetcher {
+        fun create(configuration: RetrofitConfiguration): RetrofitAccessTokenFetcher {
             val urlRequestDecorator = UrlRequestDecorator.create(BuildConfig.API_KEY)
             val signingRequestDecorator = SignatureHeaderRequestDecorator(RequestSigner.create(BuildConfig.API_SECRET))
-            val okHttpClient: OkHttpClient = OkHttpClient.Builder()
-                    .addNetworkInterceptor(urlRequestDecorator.asInterceptor())
-                    .addNetworkInterceptor(signingRequestDecorator.asInterceptor())
-                    .build()
-            val backend = Retrofit.Builder()
-                    .baseUrl(LETTERBOX_BASE_URL)
-                    .client(okHttpClient)
-                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                    .addConverterFactory(MoshiConverterFactory.create(Moshi.Builder().build()))
-                    .build()
+            val backend = configuration.newBuilder()
+                    .withRequestDecorator(urlRequestDecorator)
+                    .withRequestDecorator(signingRequestDecorator)
+                    .withBaseUrl(LETTERBOX_BASE_URL)
                     .create(AccessTokenBackend::class.java)
             return RetrofitAccessTokenFetcher(backend)
         }
