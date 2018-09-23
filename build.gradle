@@ -23,5 +23,5 @@ version = '1.0'
 
 task wrapper(type: Wrapper) {
     distributionType Wrapper.DistributionType.ALL
-    gradleVersion '4.9'
+    gradleVersion '4.10.2'
 }
