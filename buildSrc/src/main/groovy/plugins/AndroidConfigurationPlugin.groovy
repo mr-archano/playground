@@ -13,7 +13,6 @@ class AndroidConfigurationPlugin implements Plugin<Project> {
         project.plugins.withId('com.android.library') {
             addAndroidUtils(project.android, project.rootProject.version)
         }
-        addKotlinSourceSets(project)
     }
 
     private static void addAndroidUtils(android, version) {
@@ -27,14 +26,6 @@ class AndroidConfigurationPlugin implements Plugin<Project> {
                 targetSdkVersion 27
                 versionCode 1
                 versionName version
-            }
-        }
-    }
-
-    private static void addKotlinSourceSets(Project project) {
-        project.plugins.withId('kotlin-android') {
-            project.android.sourceSets.all { sourceSet ->
-                sourceSet.java.srcDirs += sourceSet.kotlin.srcDirs
             }
         }
     }

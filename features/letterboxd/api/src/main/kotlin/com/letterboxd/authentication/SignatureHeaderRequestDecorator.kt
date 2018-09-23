@@ -1,5 +1,6 @@
 package com.letterboxd.authentication
 
+import io.archano.playground.common.api.RequestDecorator
 import okhttp3.Request
 
 internal class SignatureHeaderRequestDecorator (private val signer: RequestSigner) : RequestDecorator {

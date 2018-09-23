@@ -17,9 +17,6 @@ subprojects {
         mavenCentral()
         jcenter()
     }
-
-    apply plugin: PlaygroundPlugin
-    apply plugin: 'com.novoda.build-properties'
 }
 
 version = '1.0'

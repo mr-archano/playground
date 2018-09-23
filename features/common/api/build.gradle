@@ -1,0 +1,16 @@
+apply plugin: 'kotlin'
+apply plugin: PlaygroundPlugin
+
+dependencies {
+    apiElements G.maven.moshi
+    apiElements G.maven.retrofit.core
+    apiElements G.maven.rxjava
+
+    implementation G.maven.kotlin.stdlib
+    implementation G.maven.okhttp
+    implementation G.maven.retrofit.moshi
+    implementation G.maven.retrofit.rxjava
+
+    testImplementation G.maven.junit
+    testImplementation G.maven.truth
+}

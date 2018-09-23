@@ -1,6 +1,7 @@
 package com.letterboxd.authentication
 
 import com.letterboxd.BuildConfig
+import io.archano.playground.common.api.RetrofitConfiguration
 import org.junit.Before
 import org.junit.Test
 
@@ -10,7 +11,7 @@ class RetrofitAccessTokenFetcherTest {
 
     @Before
     fun setUp() {
-        fetcher = RetrofitAccessTokenFetcher.create()
+        fetcher = RetrofitAccessTokenFetcher.create(RetrofitConfiguration())
     }
 
     @Test

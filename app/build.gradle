@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'jacoco'
+apply plugin: PlaygroundPlugin
 
 android {
     applySdk()
@@ -19,5 +20,4 @@ android {
 
 dependencies {
     implementation G.maven.android.appCompat
-    implementation G.maven.kotlin.stdlib
 }
