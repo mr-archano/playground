@@ -1,10 +1,10 @@
-package com.letterboxd.authentication
+package io.archano.playground.common.api
 
 import okhttp3.Interceptor
 import okhttp3.Interceptor.Chain
 import okhttp3.Request
 
-internal interface RequestDecorator {
+interface RequestDecorator {
 
     fun decorate(request: Request): Request
 
