@@ -1,4 +1,5 @@
 apply plugin: 'kotlin'
+apply plugin: PlaygroundPlugin
 
 dependencies {
     implementation G.maven.kotlin.stdlib
