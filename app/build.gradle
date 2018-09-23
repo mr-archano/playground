@@ -20,5 +20,4 @@ android {
 
 dependencies {
     implementation G.maven.android.appCompat
-    implementation G.maven.kotlin.stdlib
 }

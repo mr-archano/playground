@@ -34,10 +34,9 @@ android {
 }
 
 dependencies {
+    api project(':features:common:api')
+
     implementation G.maven.kotlin.stdlib
-    implementation G.maven.retrofit.core
-    implementation G.maven.rxjava
-    implementation project(':features:common:api')
 
     testImplementation G.maven.junit
     testImplementation G.maven.truth
