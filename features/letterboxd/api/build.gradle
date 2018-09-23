@@ -1,0 +1,50 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'jacoco'
+
+buildProperties {
+
+    secrets {
+        using(project.file('secrets.properties')).or([
+                apiKey   : 'N/A',
+                apiSecret: 'N/A',
+                username : 'N/A',
+                password : 'N/A'
+        ])
+        description = """
+                |This file should contain the following properties from a valid Letterboxd account:
+                |  apiKey: the Letterboxd account API key
+                |  apiSecret: the Letterboxd account API secret
+                |  username: the Letterboxd account username
+                |  password: the Letterboxd account password
+                |""".stripMargin()
+    }
+}
+
+android {
+    applySdk()
+
+    defaultConfig {
+        buildConfigString 'API_KEY', buildProperties.secrets['apiKey']
+        buildConfigString 'API_SECRET', buildProperties.secrets['apiSecret']
+        buildConfigString 'USERNAME', buildProperties.secrets['username']
+        buildConfigString 'PASSWORD', buildProperties.secrets['password']
+    }
+}
+
+dependencies {
+    implementation G.maven.kotlin.stdlib
+    implementation G.maven.moshi
+    implementation G.maven.okhttp
+    implementation G.maven.retrofit.core
+    implementation G.maven.retrofit.moshi
+    implementation G.maven.retrofit.rxjava
+    implementation G.maven.rxjava
+
+    testImplementation G.maven.junit
+    testImplementation G.maven.truth
+}
+
+jacoco {
+    exclude '**/*Companion.class', '**/*Json.class'
+}
