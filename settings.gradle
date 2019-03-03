@@ -1,3 +1,5 @@
 include ':app'
 include ':features:common:api'
 include ':features:letterboxd:api'
+include ':plugin'
+project(':plugin').projectDir = new File('gradle/plugin')
