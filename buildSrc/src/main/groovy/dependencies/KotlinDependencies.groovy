@@ -2,7 +2,7 @@ package dependencies
 
 final class KotlinDependencies {
 
-    private static final String VERSION = '1.2.61'
+    private static final String VERSION = '1.3.61'
 
     final String plugin = module('gradle-plugin')
     final String stdlib = module('stdlib')

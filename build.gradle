@@ -23,5 +23,5 @@ version = '1.0'
 
 wrapper {
     distributionType Wrapper.DistributionType.ALL
-    gradleVersion '5.2.1'
+    gradleVersion '6.0.1'
 }

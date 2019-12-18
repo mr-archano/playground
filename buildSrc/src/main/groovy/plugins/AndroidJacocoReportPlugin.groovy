@@ -60,12 +60,10 @@ class AndroidJacocoReportPlugin implements Plugin<Project> {
                             def sourceDirectories = project.files(variant.sourceSets.collect {
                                 it.java.srcDirs
                             }.flatten())
-                            jacocoReportTask.sourceDirectories = sourceDirectories
-                            project.logger.debug ">>> ${jacocoReportTask.path}.sourceDirectories = $jacocoReportTask.sourceDirectories.files"
+                            jacocoReportTask.sourceDirectories.from(sourceDirectories)
 
                             def classDirectories = project.fileTree(dir: variant.javaCompile.destinationDir, excludes: excludeList)
-                            jacocoReportTask.classDirectories = classDirectories
-                            project.logger.debug ">>> ${jacocoReportTask.path}.classDirectories = $jacocoReportTask.classDirectories.files"
+                            jacocoReportTask.classDirectories.from(classDirectories)
 
                             jacocoReportTask.executionData new File("${project.buildDir}/jacoco/test${unitTestVariant.name.capitalize()}.exec")
                             jacocoReportTask.reports {
@@ -81,11 +79,9 @@ class AndroidJacocoReportPlugin implements Plugin<Project> {
                                 it.kotlin.srcDirs
                             }.flatten())
                             jacocoReportTask.additionalSourceDirs(additionalSourceDirectories)
-                            project.logger.debug ">>> ${jacocoReportTask.path}.additionalSourceDirectories = $jacocoReportTask.additionalSourceDirs.files"
 
                             def additionalClassDirectories = project.fileTree(dir: new File(project.buildDir, "tmp/kotlin-classes/${variant.name}"), excludes: excludeList)
                             jacocoReportTask.additionalClassDirs(additionalClassDirectories)
-                            project.logger.debug ">>> ${jacocoReportTask.path}.additionalClassDirectories = $jacocoReportTask.additionalClassDirs.files"
                         }
                     }
                 }
